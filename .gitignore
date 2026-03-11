@@ -1,0 +1,21 @@
+# Secrets
+credentials.json
+token.json
+.env
+
+# Temporary Files and Folders
+a2a_venv/
+temp_a2a_sdk/
+a2a-inspector
+*.swp
+*.tmp
+*.bak
+.DS_Store
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/

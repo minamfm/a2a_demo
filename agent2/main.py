@@ -1,0 +1,20 @@
+from a2a.server.request_handlers.default_request_handler import DefaultRequestHandler
+from a2a.server.tasks.inmemory_task_store import InMemoryTaskStore
+from a2a.server.apps.jsonrpc.fastapi_app import A2AFastAPIApplication
+
+from AgentCard import agent_card
+from AgentExecutor import SheetsAgentExecutor
+
+task_store = InMemoryTaskStore()
+request_handler = DefaultRequestHandler(
+    agent_executor=SheetsAgentExecutor(),
+    task_store=task_store
+)
+app = A2AFastAPIApplication(
+    agent_card=agent_card,
+    http_handler=request_handler
+).build()
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)

@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  agent1:
+    build: ./agent1
+    ports:
+      - "8001:8000"
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+    volumes:
+      - ./token.json:/app/token.json
+    netwo:
+      - a2a-network
+  agent2:
+    build: ./agent2
+    ports:
+      - "8002:8000"
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+    volumes:
+      - ./token.json:/app/token.json
+    networks:
+      - a2a-network
+
+  agent3:
+    build: ./agent3
+    ports:
+      - "8003:8000"
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+    networks:
+      - a2a-network
+
+  inspector:
+    image: a2aprotocol/inspector:latest
+    ports:
+      - "4000:8080"
+    networks:
+      - a2a-network
+
+networks:
+  a2a-network:
+    driver: bridge
